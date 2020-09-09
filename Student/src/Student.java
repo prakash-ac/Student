@@ -1,47 +1,42 @@
+
 //*******************************************************
 // Student.java		Author: Prakash Acharya
 //
 // This is an abstract class. 
+//
 // Defines a general student object.
 //*******************************************************
 
 public abstract class Student {
+	private int id;
 	private String name, major, faculty;
-	private int id, numOfUnitsEnrolled;
-	public static final int DEFAULT_NUM_UNITS_ENROLLED = 0;
-	public static int[] num_students = new int[100];
-	public static int index = 0;
-	public static int count;
-	public static final int DEFUALT_ID = 0;
+	private int numOfUnitsEnrolled;
 	protected static final int maxUnitsAllowed = 18;
-	protected static final double perUnitCost = 576.0;
+	
+	public static int count = 0;
+	public static final int START_ID = 100000;
+	public static final double PER_UNIT_COST = 576.0;
+	public static final int DEFAULT_NUM_UNITS_ENROLLED = 0;
+	
 	
 	// this constructor is invoked when all the parameters are provided
-	public Student(String name, int id, String major, String faculty, 
+	// student id starts from 100000, and is incremented by 1 for each new student
+	public Student(String name, String major, String faculty, 
 			int numOfUnitsEnrolled) {
+		this.id = START_ID + count;
 		this.name = name;
 		this.major = major;
 		this.faculty = faculty;
-		this.id = id;
 		this.numOfUnitsEnrolled = numOfUnitsEnrolled;
-		count ++;
-		
+		count++;
 		
 	}
 	
-	// this constructor will be invoked if no number of units enrolled specified
-	public Student(String name, int id, String major, String faculty) {
-		this(name,id, major, faculty, DEFAULT_NUM_UNITS_ENROLLED);
-	}
-	
-	// this constructor will be invoked if no id is provided.
-	public Student(String name, String major, String faculty,int numOfUnitsEnrolled) {
-			this(name, DEFUALT_ID, major, faculty, numOfUnitsEnrolled);
-		}
 	
 	// this constructor will be invoked if no id and number number of units enrolled is provided
 	public Student(String name, String major, String faculty) {
-		this(name, DEFUALT_ID, major, faculty, DEFAULT_NUM_UNITS_ENROLLED);
+		this(name, major, faculty, DEFAULT_NUM_UNITS_ENROLLED);
+		
 	}
 
 
@@ -73,10 +68,6 @@ public abstract class Student {
 		return id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
-
 	public int getNumOfUnitsEnrolled() {
 		return numOfUnitsEnrolled;
 	}
@@ -105,8 +96,8 @@ public abstract class Student {
 		}
 	}
 	
+	// Generate total tuition cost to pay for a student
+	// To be implemented by child classes
 	public abstract String generateTutionCost();
-	
-	public abstract String generateSchedule();
 
 }
