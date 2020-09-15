@@ -11,7 +11,6 @@ public class StudentDriver {
 
 	public static void main(String[] args) {
 		
-		
 		// List of majors
 	    ArrayList<String> majors = new ArrayList<String>( 
 	               Arrays.asList("Microbiology", 
@@ -19,9 +18,6 @@ public class StudentDriver {
 	                             "Computer Science",
 	                             "Poetry"));
 	    DecimalFormat df = new DecimalFormat("0.00");
-		
-		
-		
 		
 		// Create 3 Resident, 3 Non-Resident, and 3 International students
 		int i = 0;
@@ -67,7 +63,6 @@ public class StudentDriver {
 					System.out.println("Financial Aid Amount: " + 
 								(rs.getFinAidAmount() > 0.0 ? "$" +  df.format(rs.getFinAidAmount()): "Not Availabe"));
 					} 
-
 				} 
 			else if(s instanceof InternationalStudent) {
 				InternationalStudent is = (InternationalStudent) s;
@@ -78,10 +73,7 @@ public class StudentDriver {
 			}
 			
 			System.out.println();
-		
 		}
-		
-
 		
 		System.out.println("\n****** Testing a method on an Enum varible *******.\nShould print 'School of Business': " + Faculty.BUSINESS.getSchool());
 		
@@ -99,10 +91,9 @@ public class StudentDriver {
 		NonResidentStudent nrs02 = new NonResidentStudent("Test Three", "Accounting", "Graduate", 12, true);
 	    System.out.println("Since each student has a unique id, it should print false: " + nrs01.equals(nrs02));
 	    
-	    // I also tested for positive cases by commenting on "count++" statement in 
-	    // Student class constructor to create duplicate student objects.
-	    // It prints true.
-		
+	    // I also tested for positive cases by removing the id comparison part of
+	    // the Student class's equals method. It prints true.
+	 
 		System.out.println("\nThere should be 19 student objects created. There are " + allStudents.size() + " student objects.\n");
 		
 	}
