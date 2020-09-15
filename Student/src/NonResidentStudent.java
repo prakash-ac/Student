@@ -52,8 +52,10 @@ public class NonResidentStudent extends ResidentStudent{
 	public boolean equals(Object obj) {
 		if(obj instanceof NonResidentStudent){
 			NonResidentStudent univStu = (NonResidentStudent) obj;
-			return getId()==univStu.getId() && getName().equalsIgnoreCase(univStu.getName()) && 
-					getDegree().equals(univStu.getDegree()) && getMajor().equals(univStu.getMajor());
+			return super.equals(univStu);
+			
+			//return getId()==univStu.getId() && getName().equalsIgnoreCase(univStu.getName()) && 
+			//		getDegree().equals(univStu.getDegree()) && getMajor().equals(univStu.getMajor());
 		}else {
 			return false;
 		}

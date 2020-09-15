@@ -74,8 +74,9 @@ public class ResidentStudent extends Student {
 	public boolean equals(Object obj) {
 		if(obj instanceof ResidentStudent){
 			ResidentStudent univStu = (ResidentStudent) obj;
-			return getId()==univStu.getId() && getName().equalsIgnoreCase(univStu.getName()) && 
-					getDegree().equals(univStu.getDegree()) && getMajor().equals(univStu.getMajor());
+			return super.equals(univStu);
+			//return getId()==univStu.getId() && getName().equalsIgnoreCase(univStu.getName()) && 
+			//		getDegree().equals(univStu.getDegree()) && getMajor().equals(univStu.getMajor());
 		}else {
 			return false;
 		}

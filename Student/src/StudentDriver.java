@@ -82,8 +82,29 @@ public class StudentDriver {
 		}
 		
 
-		System.out.println("\nThere should be 13 students, there are " + allStudents.size() + " students.\n");
-		System.out.println("Testing a method on an Enum varible. Should print 'School of Business': " + Faculty.BUSINESS.getSchool());
+		
+		System.out.println("\n****** Testing a method on an Enum varible *******.\nShould print 'School of Business': " + Faculty.BUSINESS.getSchool());
+		
+		System.out.println("\n******* Testing equals method ******** ");
+		
+		ResidentStudent rs01 = new ResidentStudent("Test One", "Microbiology", "Undergraduate", 9, true);
+		ResidentStudent rs02 = new ResidentStudent("Test One", "Microbiology", "Undergraduate", 9, true);
+		System.out.println("Since each student has a unique id, it should print false: " + rs01.equals(rs02));
+		
+		InternationalStudent is01 = new InternationalStudent("Test Two", "Computer Science", "Undergraduate", 12, "Test Country");
+		InternationalStudent is02 = new InternationalStudent("Test Two", "Computer Science", "Undergraduate", 12, "Test Country");
+		System.out.println("Since each student has a unique id, it should print false: " + is01.equals(is02));
+		
+		NonResidentStudent nrs01 = new NonResidentStudent("Test Three", "Accounting", "Graduate", 12, true);
+		NonResidentStudent nrs02 = new NonResidentStudent("Test Three", "Accounting", "Graduate", 12, true);
+	    System.out.println("Since each student has a unique id, it should print false: " + nrs01.equals(nrs02));
+	    
+	    // I also tested for positive cases by commenting on "count++" statement in 
+	    // Student class constructor to create duplicate student objects.
+	    // It prints true.
+		
+		System.out.println("\nThere should be 19 student objects created. There are " + allStudents.size() + " student objects.\n");
+		
 	}
 
 }

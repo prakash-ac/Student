@@ -69,9 +69,10 @@ public class InternationalStudent extends Student {
 	public boolean equals(Object obj) {
 		if(obj instanceof InternationalStudent){
 			InternationalStudent univStu = (InternationalStudent) obj;
-			return getId()==univStu.getId() && getName().equalsIgnoreCase(univStu.getName()) && 
-					getDegree().equals(univStu.getDegree()) && getMajor().equals(univStu.getMajor()) &&
-					countryApplyingFrom.equalsIgnoreCase(univStu.countryApplyingFrom);
+			return super.equals(univStu) && countryApplyingFrom.equalsIgnoreCase(univStu.countryApplyingFrom);
+			//return getId()==univStu.getId() && getName().equalsIgnoreCase(univStu.getName()) && 
+			//		getDegree().equals(univStu.getDegree()) && getMajor().equals(univStu.getMajor()) &&
+			//		countryApplyingFrom.equalsIgnoreCase(univStu.countryApplyingFrom);
 		}else {
 			return false;
 		}
