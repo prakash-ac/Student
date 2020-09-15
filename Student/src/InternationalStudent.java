@@ -13,16 +13,16 @@ public class InternationalStudent extends Student {
 	private String countryApplyingFrom;
 	
 	public InternationalStudent(String name, String major, 
-			String faculty, int numOfUnitsEnrolled, String countryApplyingFrom) {
+			String degree, int numOfUnitsEnrolled, String countryApplyingFrom) {
 		
-		super(name, major, faculty, numOfUnitsEnrolled);
+		super(name, major, degree, numOfUnitsEnrolled);
 		this.countryApplyingFrom = countryApplyingFrom;
 	
 	}
 	
 	// this constructor will be invoked if no number of units enrolled specified
-	public InternationalStudent(String name, String major, String faculty, String countryApplyingFrom) {
-		super(name, major, faculty);
+	public InternationalStudent(String name, String major, String degree, String countryApplyingFrom) {
+		super(name, major, degree);
 		this.countryApplyingFrom = countryApplyingFrom;
 	}
 	
@@ -70,7 +70,7 @@ public class InternationalStudent extends Student {
 		if(obj instanceof InternationalStudent){
 			InternationalStudent univStu = (InternationalStudent) obj;
 			return getId()==univStu.getId() && getName().equalsIgnoreCase(univStu.getName()) && 
-					getFaculty().equals(univStu.getFaculty()) && getMajor().equals(univStu.getMajor()) &&
+					getDegree().equals(univStu.getDegree()) && getMajor().equals(univStu.getMajor()) &&
 					countryApplyingFrom.equalsIgnoreCase(univStu.countryApplyingFrom);
 		}else {
 			return false;

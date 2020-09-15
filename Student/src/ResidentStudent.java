@@ -14,24 +14,24 @@ public class ResidentStudent extends Student {
 	private static final boolean DEFAULT_APPLIED_FOR_FINAID = false;
 	public static final double perUnitCost = 326.00;
 	
-	public ResidentStudent(String name, String major, String faculty, 
+	public ResidentStudent(String name, String major, String degree, 
 			int numOfUnitsEnrolled, boolean appliedForFinAid) {
-		super(name, faculty, major, numOfUnitsEnrolled);
+		super(name, major, degree, numOfUnitsEnrolled);
 		this.appliedForFinAid = appliedForFinAid;
 	}
 	
 	// this constructor will be invoked if number of units is not provided.
-	public ResidentStudent(String name, String major, String faculty, 
+	public ResidentStudent(String name, String major, String degree, 
 			boolean finAidApplied) {
-		super(name, major, faculty);
+		super(name, major, degree);
 		this.appliedForFinAid = DEFAULT_APPLIED_FOR_FINAID;
 	}
 	
 	
 	// this constructor will be invoked if number of units enrolled is not provided, and 
 	// financial aid applied is not provided as true value.
-	public ResidentStudent(String name, String major, String faculty) {
-		this(name, major, faculty, DEFAULT_APPLIED_FOR_FINAID);
+	public ResidentStudent(String name, String major, String degree) {
+		this(name, major, degree, DEFAULT_APPLIED_FOR_FINAID);
 	}
 
 
@@ -45,9 +45,9 @@ public class ResidentStudent extends Student {
 	
 	// class specific method 1
 	// Only a full-time student who applies for financial aid gets financial aid.
-	protected double getFinAidAmount() {
+	public double getFinAidAmount() {
 		if(appliedForFinAid && isFullTime())
-			finAidAmount = 3000.0;
+			finAidAmount = 3000.78;
 		return finAidAmount;
 	}
 	
@@ -66,8 +66,7 @@ public class ResidentStudent extends Student {
 	@Override
 	public String toString() {
 		String rs = super.toString();
-		rs += "\nFull-time Student: " + isFullTime() + 
-				"\nApplied For Financial Aid: " + appliedForFinAid;
+		rs += "\nStatus: " + (isFullTime() ? "Full-Time" : "Part-Time");
 		return rs;
 	}
 	
@@ -76,7 +75,7 @@ public class ResidentStudent extends Student {
 		if(obj instanceof ResidentStudent){
 			ResidentStudent univStu = (ResidentStudent) obj;
 			return getId()==univStu.getId() && getName().equalsIgnoreCase(univStu.getName()) && 
-					getFaculty().equals(univStu.getFaculty()) && getMajor().equals(univStu.getMajor());
+					getDegree().equals(univStu.getDegree()) && getMajor().equals(univStu.getMajor());
 		}else {
 			return false;
 		}

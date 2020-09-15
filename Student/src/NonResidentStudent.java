@@ -11,19 +11,19 @@ import java.text.DecimalFormat;
 
 public class NonResidentStudent extends ResidentStudent{
 	
-	public NonResidentStudent(String name, String major, String faculty,
+	public NonResidentStudent(String name, String major, String degree,
 		int numOfUnitsEnrolled, boolean appliedForFinAid) {
-		super(name, major, faculty, numOfUnitsEnrolled, appliedForFinAid);
+		super(name, major, degree, numOfUnitsEnrolled, appliedForFinAid);
 	}
 	
 	// this constructor is invoked if number units enrolled is not provided
-	public NonResidentStudent(String name, String major, String faculty, boolean appliedForFinAid) {
-		super(name, major, faculty, appliedForFinAid);
+	public NonResidentStudent(String name, String major, String degree, boolean appliedForFinAid) {
+		super(name, major, degree, appliedForFinAid);
 	}
 	
 	// this constructor is invoked if only name, major, and faculty is provided
-	public NonResidentStudent(String name, String major, String faculty) {
-		super(name, major, faculty);
+	public NonResidentStudent(String name, String major, String degree) {
+		super(name, major, degree);
 	}
 	
 	// class specific method 1
@@ -44,8 +44,7 @@ public class NonResidentStudent extends ResidentStudent{
 	@Override
 	public String toString() {
 		String rs = super.toString();
-		rs += "\nFull-time Student: " + isFullTime() +
-				"\nState: Demo State";
+		rs += "\nState: Demo State";
 		return rs;
 	}
 	
@@ -54,7 +53,7 @@ public class NonResidentStudent extends ResidentStudent{
 		if(obj instanceof NonResidentStudent){
 			NonResidentStudent univStu = (NonResidentStudent) obj;
 			return getId()==univStu.getId() && getName().equalsIgnoreCase(univStu.getName()) && 
-					getFaculty().equals(univStu.getFaculty()) && getMajor().equals(univStu.getMajor());
+					getDegree().equals(univStu.getDegree()) && getMajor().equals(univStu.getMajor());
 		}else {
 			return false;
 		}

@@ -1,5 +1,5 @@
 import java.util.*;
-
+import java.text.DecimalFormat;
 
 //*******************************************************
 // StudentDriver.java		Author: Prakash Acharya
@@ -12,40 +12,45 @@ public class StudentDriver {
 	public static void main(String[] args) {
 		
 		
-		// This map contains the major and faculty as key value pair
-		Map<String, String> majorAndFaculty = new HashMap<String, String>();
-		
-		majorAndFaculty.put("Microbiology", "Science and Engeering");
-		majorAndFaculty.put("Accounting", "Accounting and Business");
-		majorAndFaculty.put("Computer Science", "Science and Engeering");
-		
-		// ArrayList of Student type contains all the students(Resident, NonResident, International)
-		ArrayList<Student> students = new ArrayList<Student>();
+		// List of majors
+	    ArrayList<String> majors = new ArrayList<String>( 
+	               Arrays.asList("Microbiology", 
+	                             "Accounting", 
+	                             "Computer Science",
+	                             "Poetry"));
+	    DecimalFormat df = new DecimalFormat("0.00");
 		
 		
 		
 		
 		// Create 3 Resident, 3 Non-Resident, and 3 International students
 		int i = 0;
-		for(String str: majorAndFaculty.keySet()) {
+		for(String major: majors) {
 			String rsDemo = "Demo Resident" + i;
-			ResidentStudent rs01 = new ResidentStudent(rsDemo, str, majorAndFaculty.get(str), 12, true);
-			students.add(rs01);
+			new ResidentStudent(rsDemo, major, "Graduate", 12, true);
 			
 			String nrsDemo = "Demo Non-Resident" + i;
-			NonResidentStudent nrs01 = new NonResidentStudent(nrsDemo, str, majorAndFaculty.get(str), 12, true);
-			students.add(nrs01);
+			new NonResidentStudent(nrsDemo, major, "Graduate", 12, true);
 			
 			String isDemo = "Demo International" + i;
-			InternationalStudent is01 = new InternationalStudent(isDemo, str, majorAndFaculty.get(str), 12, "Demo Country");
-			students.add(is01);
+			new InternationalStudent(isDemo, major, "Undergraduate", 12, "Demo Country");
 			
 			i++;
 			
 		}
 		
-		// print each student, and call class specific methods
-		for(Student s: students) {
+		// Create a Resident Student with same name as "Demo Resident2"
+		// Since two Resident Students will have same names, sort will be based on their id's.
+		new ResidentStudent("Demo Resident2", "Microbiology", "Undergraduate", 9, true);
+		
+		// An ArrayList that holds all student objects
+		ArrayList<Student> allStudents = Student.getAllStudents();
+		
+		//Sort all student objects based on the name, if two names are equal perform sort on id
+		Collections.sort(allStudents);
+		
+		// Display each student, and call class specific methods
+		for(Student s: allStudents) {
 			if(s instanceof ResidentStudent) {
 				if(s instanceof NonResidentStudent) {
 					NonResidentStudent nrs = (NonResidentStudent) s;
@@ -59,14 +64,15 @@ public class StudentDriver {
 					System.out.println(rs);
 					System.out.println("\nCalling two ResidentStudent class specific methods:");
 					rs.displayHomeState();
-					System.out.println("Total financial aid provided: " + rs.getFinAidAmount());
+					System.out.println("Financial Aid Amount: " + 
+								(rs.getFinAidAmount() > 0.0 ? "$" +  df.format(rs.getFinAidAmount()): "Not Availabe"));
 					} 
 
 				} 
 			else if(s instanceof InternationalStudent) {
 				InternationalStudent is = (InternationalStudent) s;
 				System.out.println(is);
-				System.out.println("\nCalling wo InternationalStudent class specific methods:");
+				System.out.println("\nCalling two InternationalStudent class specific methods:");
 				System.out.println(is.describeCountry());
 				System.out.println(is.welcomeMessage());
 			}
@@ -74,7 +80,10 @@ public class StudentDriver {
 			System.out.println();
 		
 		}
-		System.out.println("\nThere should be 9 students, there are " + students.size() + " students.");
+		
+
+		System.out.println("\nThere should be 13 students, there are " + allStudents.size() + " students.\n");
+		System.out.println("Testing a method on an Enum varible. Should print 'School of Business': " + Faculty.BUSINESS.getSchool());
 	}
 
 }
