@@ -1,9 +1,12 @@
+import java.util.ArrayList;
 
 public class Electronic extends Product {
 	
 	private int warrantyYears;
 	private boolean hasWarranty;
 	private static String DEFAULT_LOCATION = "Electronic Department";
+	private static ArrayList<Electronic> eProducts = new ArrayList<Electronic>();
+
 	
 	public Electronic(int sku, String name, double price, String location, 
 			boolean hasWarranty) {
@@ -19,13 +22,7 @@ public class Electronic extends Product {
 	
 	public Electronic(int sku, String name) {
 		
-		super(sku, name);
-		this.hasWarranty = true;
-		if(hasWarranty==true) {
-			this.warrantyYears = 2;
-		}else {
-			this.warrantyYears = 0;
-		}
+		this(sku, name, Product.DEFAULT_PRICE, DEFAULT_LOCATION, false);
 		
 	}
 
@@ -48,6 +45,10 @@ public class Electronic extends Product {
 		this.hasWarranty = hasWarranty;
 	}
 	
+	public static ArrayList<Electronic> getAllHCProducts() {
+		return eProducts;
+	}
+	
 	@Override
 	public String toString() {
 		String product = super.toString();
@@ -58,6 +59,11 @@ public class Electronic extends Product {
 	@Override
 	public boolean equals(Object obj) {
 		return super.equals(obj);
+	}
+	
+	@Override
+	public String sellItem() {
+		return "The item is just sold";
 	}
 	
 }
