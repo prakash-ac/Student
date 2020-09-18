@@ -18,6 +18,7 @@ public class StudentDriver {
 	                             "Computer Science",
 	                             "Poetry"));
 	    DecimalFormat df = new DecimalFormat("0.00");
+	    
 		
 		// Create 3 Resident, 3 Non-Resident, and 3 International students
 		int i = 0;
@@ -75,7 +76,8 @@ public class StudentDriver {
 			System.out.println();
 		}
 		
-		System.out.println("\n****** Testing a method on an Enum varible *******.\nShould print 'School of Business': " + Faculty.BUSINESS.getSchool());
+		System.out.println("\n****** Testing a method on an Enum varible *******");
+		System.out.println("Should print 'School of Business': " + Faculty.BUSINESS.getSchool());
 		
 		System.out.println("\n******* Testing equals method ******** ");
 		
@@ -94,7 +96,7 @@ public class StudentDriver {
 	    // I also tested for positive cases by removing the id comparison part of
 	    // the Student class's equals method. It prints true.
 	 
-		System.out.println("\nThere should be 19 student objects created. There are " + allStudents.size() + " student objects.\n");
+		System.out.println("\nThere should be 19 student objects created. There are " + allStudents.size() + " student objects.");
 		
 	}
 
