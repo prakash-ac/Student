@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Comparator;
 
 //*******************************************************
 // Student.java		Author: Prakash Acharya
@@ -22,8 +23,7 @@ public abstract class Student implements Comparable<Student> {
 	public static int count = 0;
 	public static final int START_ID = 100000;
 	public static final double PER_UNIT_COST = 576.0;
-	public static final int DEFAULT_NUM_UNITS_ENROLLED = 0;
-	
+	public static final int DEFAULT_NUM_UNITS_ENROLLED = 12;
 	
 	// this constructor is invoked when all the parameters are provided
 	// student id starts from 100000, and is incremented by 1 for each new student
@@ -142,9 +142,56 @@ public abstract class Student implements Comparable<Student> {
 			return false;
 		}
 	}
-	
+		
 	// Generate total tuition cost to pay for a student
 	// To be implemented by child classes
 	public abstract String generateTutionCost();
+	
+	
+	// Compare on the basis of student's name
+	public static class StudentNameComparator implements Comparator<Student> {
+
+		   @Override
+		    public int compare(Student s1, Student s2) {
+		        return s1.name.trim().compareTo(s2.name.trim());
+		   }
+		}
+	// Compare on the basis of student's id
+    public static class StudentIdComparator implements Comparator<Student>{
+
+		  @Override
+		  public int compare(Student s1, Student s2) {
+		    return Integer.compare(s1.id, s2.id);
+		  }
+
+		}
+    
+	// Compare on the basis of student's name
+	public static class StudentDegreeComparator implements Comparator<Student> {
+
+		   @Override
+		    public int compare(Student s1, Student s2) {
+		        return s1.degree.trim().compareTo(s1.degree.trim());
+		   }
+		}
+	// Compare on the basis of student's id
+    public static class StudentMajorComparator implements Comparator<Student>{
+
+		  @Override
+		  public int compare(Student s1, Student s2) {
+		    return s1.major.trim().compareTo(s2.major.trim());
+		  }
+
+		}
+    
+ // Compare on the basis of number of units enrolled
+    public static class StudentTotalUnitsComparator implements Comparator<Student>{
+
+		  @Override
+		  public int compare(Student s1, Student s2) {
+		    return Integer.compare(s1.numOfUnitsEnrolled, s2.numOfUnitsEnrolled);
+		  }
+
+		}
 
 }

@@ -8,6 +8,15 @@ import java.text.DecimalFormat;
 //*******************************************************
 
 public class StudentDriver {
+	
+	
+	//***** Comparator instances*****
+	public final static Comparator<Student> ORDER_BY_NAME = new Student.StudentNameComparator();
+	public final static Comparator<Student> ORDER_BY_ID = new Student.StudentIdComparator();
+	public final static Comparator<Student> ORDER_BY_MAJOR = new Student.StudentMajorComparator();
+	public final static Comparator<Student> ORDER_BY_DEGREE= new Student.StudentDegreeComparator();
+	public final static Comparator<Student> ORDER_BY_TOTAL_UNITS_ENROLLED = new Student.StudentTotalUnitsComparator();
+	
 
 	public static void main(String[] args) {
 		
@@ -27,7 +36,7 @@ public class StudentDriver {
 			new ResidentStudent(rsDemo, major, "Graduate", 12, true);
 			
 			String nrsDemo = "Demo Non-Resident" + i;
-			new NonResidentStudent(nrsDemo, major, "Graduate", 12, true);
+			new NonResidentStudent(nrsDemo, major, "Graduate", 10, true);
 			
 			String isDemo = "Demo International" + i;
 			new InternationalStudent(isDemo, major, "Undergraduate", 12, "Demo Country");
@@ -43,60 +52,56 @@ public class StudentDriver {
 		// An ArrayList that holds all student objects
 		ArrayList<Student> allStudents = Student.getAllStudents();
 		
+		// M3 Using Comparator
 		//Sort all student objects based on the name, if two names are equal perform sort on id
-		Collections.sort(allStudents);
+		Collections.sort(allStudents, ORDER_BY_NAME);
 		
 		// Display each student, and call class specific methods
+		
+		System.out.println("******** Sorted By Name ********");
 		for(Student s: allStudents) {
 			if(s instanceof ResidentStudent) {
 				if(s instanceof NonResidentStudent) {
 					NonResidentStudent nrs = (NonResidentStudent) s;
 					System.out.println(nrs);
-					System.out.println("\nCalling two NonResidentStudent class specific methods:");
-					nrs.describeState();
-					nrs.printHello();
 				}
 				else {
 					ResidentStudent rs = (ResidentStudent) s;
 					System.out.println(rs);
-					System.out.println("\nCalling two ResidentStudent class specific methods:");
-					rs.displayHomeState();
-					System.out.println("Financial Aid Amount: " + 
-								(rs.getFinAidAmount() > 0.0 ? "$" +  df.format(rs.getFinAidAmount()): "Not Availabe"));
 					} 
 				} 
 			else if(s instanceof InternationalStudent) {
 				InternationalStudent is = (InternationalStudent) s;
 				System.out.println(is);
-				System.out.println("\nCalling two InternationalStudent class specific methods:");
-				System.out.println(is.describeCountry());
-				System.out.println(is.welcomeMessage());
 			}
 			
 			System.out.println();
 		}
 		
-		System.out.println("\n****** Testing a method on an Enum varible *******");
-		System.out.println("Should print 'School of Business': " + Faculty.BUSINESS.getSchool());
+		// M3 Using Comparator
+		Collections.sort(allStudents, ORDER_BY_MAJOR);
 		
-		System.out.println("\n******* Testing equals method ******** ");
+		// Display each student, and call class specific methods
 		
-		ResidentStudent rs01 = new ResidentStudent("Test One", "Microbiology", "Undergraduate", 9, true);
-		ResidentStudent rs02 = new ResidentStudent("Test One", "Microbiology", "Undergraduate", 9, true);
-		System.out.println("Since each student has a unique id, it should print false: " + rs01.equals(rs02));
-		
-		InternationalStudent is01 = new InternationalStudent("Test Two", "Computer Science", "Undergraduate", 12, "Test Country");
-		InternationalStudent is02 = new InternationalStudent("Test Two", "Computer Science", "Undergraduate", 12, "Test Country");
-		System.out.println("Since each student has a unique id, it should print false: " + is01.equals(is02));
-		
-		NonResidentStudent nrs01 = new NonResidentStudent("Test Three", "Accounting", "Graduate", 12, true);
-		NonResidentStudent nrs02 = new NonResidentStudent("Test Three", "Accounting", "Graduate", 12, true);
-	    System.out.println("Since each student has a unique id, it should print false: " + nrs01.equals(nrs02));
-	    
-	    // I also tested for positive cases by removing the id comparison part of
-	    // the Student class's equals method. It prints true.
-	 
-		System.out.println("\nThere should be 19 student objects created. There are " + allStudents.size() + " student objects.");
+		System.out.println("******** Sorted By Major ********");
+		for(Student s: allStudents) {
+			if(s instanceof ResidentStudent) {
+				if(s instanceof NonResidentStudent) {
+					NonResidentStudent nrs = (NonResidentStudent) s;
+					System.out.println(nrs);
+				}
+				else {
+					ResidentStudent rs = (ResidentStudent) s;
+					System.out.println(rs);
+					} 
+				} 
+			else if(s instanceof InternationalStudent) {
+				InternationalStudent is = (InternationalStudent) s;
+				System.out.println(is);
+			}
+			
+			System.out.println();
+		}
 		
 	}
 
