@@ -1,3 +1,8 @@
+//*******************************************************
+// Course.java		Author: Prakash Acharya 
+//
+// Demonstrates the use of Builder Pattern
+//*******************************************************
 
 public class Course {
 	
@@ -9,7 +14,8 @@ public class Course {
 		private Type(String description) {
 			this.description = description;
 		}
-		// returns string of enum type
+		// returns string for an instance of the enum Type
+		@Override
 		public String toString(){
 			return description;
 		}
@@ -65,6 +71,7 @@ public class Course {
 		}
 	}
 	
+	@Override
 	public String toString() {
 		String c = "Course Name: " + name + 
 				"\nCourse Number: " + number;
@@ -74,7 +81,7 @@ public class Course {
 		}
 		
 		if(!bookRequired.isEmpty()) {
-			c += "\\nRequired Book: " + bookRequired;
+			c += "\nRequired Book: " + bookRequired;
 		}
 		
 		if(!bookRequired.isEmpty()) {

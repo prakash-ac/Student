@@ -15,9 +15,11 @@ public class InternationalStudent extends Student {
 	public InternationalStudent(String name, String major, 
 			String degree, int numOfUnitsEnrolled, String countryApplyingFrom) {
 		
-		super(name, major, degree, numOfUnitsEnrolled);
+		// An international student is always required to be enrolled into 12 or more units of courses.
+		// If numberOfUnitsEnrolled is less than 12, the student is enrolled into default 12 units.
+		super(name, major, degree, numOfUnitsEnrolled < 12 ? Student.DEFAULT_NUM_UNITS_ENROLLED : numOfUnitsEnrolled);
 		this.countryApplyingFrom = countryApplyingFrom;
-	
+		
 	}
 	
 	// this constructor will be invoked if no number of units enrolled specified

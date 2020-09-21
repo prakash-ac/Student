@@ -39,26 +39,24 @@ public class StudentDriver {
 			new NonResidentStudent(nrsDemo, major, "Graduate", 10, true);
 			
 			String isDemo = "Demo International" + i;
-			new InternationalStudent(isDemo, major, "Undergraduate", 12, "Demo Country");
+			new InternationalStudent(isDemo, major, "Undergraduate", 8, "Demo Country");
 			
 			i++;
 			
 		}
-		
-		// Create a Resident Student with same name as "Demo Resident2"
-		// Since two Resident Students will have same names, sort will be based on their id's.
-		new ResidentStudent("Demo Resident2", "Microbiology", "Undergraduate", 9, true);
+
 		
 		// An ArrayList that holds all student objects
 		ArrayList<Student> allStudents = Student.getAllStudents();
 		
-		// M3 Using Comparator
-		//Sort all student objects based on the name, if two names are equal perform sort on id
+		// M3 USING COMPARATOR
+		//Sort all student objects based on the name
 		Collections.sort(allStudents, ORDER_BY_NAME);
 		
-		// Display each student, and call class specific methods
-		
-		System.out.println("******** Sorted By Name ********");
+		System.out.println("******** Sorted By Name ********\n");
+		// It was not necessary to downcast Student class object to specific child class object
+		// because no child class specific methods are invoked here. 
+		// However, I just did not want to remove the example of down casting for future reference.
 		for(Student s: allStudents) {
 			if(s instanceof ResidentStudent) {
 				if(s instanceof NonResidentStudent) {
@@ -74,16 +72,14 @@ public class StudentDriver {
 				InternationalStudent is = (InternationalStudent) s;
 				System.out.println(is);
 			}
-			
 			System.out.println();
 		}
 		
-		// M3 Using Comparator
+		// M3 USING COMPARATOR
+		// sort students based on their major
 		Collections.sort(allStudents, ORDER_BY_MAJOR);
 		
-		// Display each student, and call class specific methods
-		
-		System.out.println("******** Sorted By Major ********");
+		System.out.println("******** Sorted By Major ********\n");
 		for(Student s: allStudents) {
 			if(s instanceof ResidentStudent) {
 				if(s instanceof NonResidentStudent) {
@@ -103,6 +99,13 @@ public class StudentDriver {
 			System.out.println();
 		}
 		
+		// M3 USING STRATEGY
+		// invoke generateSchedule() based on their full-time or part-time status
+		System.out.println("******** Using Strategy Pattern ********");
+		for(Student s: allStudents) {
+			System.out.println("\nStudent Name: " + s.getName());
+			s.generateSchedule();
+		}
 	}
 
 }

@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-import java.util.Comparator;
 
 //*******************************************************
 // Student.java		Author: Prakash Acharya
@@ -9,8 +7,12 @@ import java.util.Comparator;
 // Defines a general student object.
 //*******************************************************
 
+import java.util.ArrayList;
+import java.util.Comparator;
+
 public abstract class Student implements Comparable<Student> {
 	private Faculty fac;
+	private ScheduleGenerator schGen;
 	private int id;
 	private String name, major, degree;
 	private int numOfUnitsEnrolled;
@@ -54,6 +56,14 @@ public abstract class Student implements Comparable<Student> {
 			default:
 				this.fac = Faculty.ARTS;
 				break;
+		}
+		
+		// an appropriate instance of ScheduleGenerator interface's child class will be instantiated 
+		// for a student object based on number of units enrolled.
+		if(numOfUnitsEnrolled >= 12) {
+			this.schGen = 	new FullTimeScheduleGenerator();	
+			} else  {
+				this.schGen = new PartTimeScheduleGenerator();
 		}
 		count++;
 		students.add(this);
@@ -111,6 +121,13 @@ public abstract class Student implements Comparable<Student> {
 			this.numOfUnitsEnrolled = numOfUnitsEnrolled;
 	}
 	
+	//M3 USING STRATEGY PATTERN
+	public void generateSchedule() {
+		// ScheduleGenerator will handle generation of schedule based on 
+		// which instance of child class of ScheduleGenerator interface is assigned to it
+		System.out.println(name + "\'s class schedule is as follows:" + schGen.generateSchedule());
+	}
+	
 	public String getFaculty() {
 		return fac.toString();
 	}
@@ -147,7 +164,7 @@ public abstract class Student implements Comparable<Student> {
 	// To be implemented by child classes
 	public abstract String generateTutionCost();
 	
-	
+	// M3 USING COMPARATOR
 	// Compare on the basis of student's name
 	public static class StudentNameComparator implements Comparator<Student> {
 
